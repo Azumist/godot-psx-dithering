@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Sphere.tscn" type="PackedScene" id=1]
+[ext_resource path="res://shaders/psx_dithering.shader" type="Shader" id=2]
+[ext_resource path="res://shaders/bayer.png" type="Texture" id=3]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 2 )
+shader_param/screen_width = 512.0
+shader_param/screen_height = 300.0
+shader_param/color_depth = 32.0
+shader_param/dither_pattern = ExtResource( 3 )
+
+[sub_resource type="ViewportTexture" id=2]
+viewport_path = NodePath("TextureRect/Viewport")
+
+[node name="ViewportRender" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+material = SubResource( 1 )
+margin_right = 1024.0
+margin_bottom = 600.0
+texture = SubResource( 2 )
+expand = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="TextureRect"]
+size = Vector2( 512, 300 )
+hdr = false
+render_target_v_flip = true
+
+[node name="Sphere" parent="TextureRect/Viewport" instance=ExtResource( 1 )]
