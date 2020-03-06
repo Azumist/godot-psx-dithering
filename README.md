@@ -6,6 +6,7 @@ PSX dithering shader for Godot 3.X.
 ## Important
 
 Make sure that ```repeat``` flag of bayer.png in the import section is enabled, also ```filter``` and ```mipmaps``` flags must be set to off.
+
 ![bayer.png import settings](https://i.imgur.com/PLLLjnY.png)
 
 ## About
